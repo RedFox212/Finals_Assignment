@@ -1,151 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:wght@700&display=swap');
+
 :root {
+  --transition-speed: 0.5s;
+}
+
+/* Theme: Dark (Default) */
+.theme-dark {
   --primary-color: #3498db;
   --secondary-color: #2ecc71;
-  --background-color: #1a1a2e;
-  --text-color: #ecf0f1;
+  --background-color: #0f172a;
+  --text-color: #f8fafc;
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
+  --accent-color: #38bdf8;
+}
+
+/* Theme: Light */
+.theme-light {
+  --primary-color: #2563eb;
+  --secondary-color: #10b981;
+  --background-color: #f8fafc;
+  --text-color: #0f172a;
+  --glass-bg: rgba(0, 0, 0, 0.05);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --accent-color: #3b82f6;
+}
+
+/* Theme: Midnight */
+.theme-midnight {
+  --primary-color: #8b5cf6;
+  --secondary-color: #ec4899;
+  --background-color: #0c0a09;
+  --text-color: #fafaf9;
+  --glass-bg: rgba(139, 92, 246, 0.1);
+  --glass-border: rgba(139, 92, 246, 0.2);
+  --accent-color: #d946ef;
+  --header-grad: linear-gradient(135deg, #4c1d95 0%, #831843 100%);
+}
+
+/* Theme: Emerald */
+.theme-emerald {
+  --primary-color: #10b981;
+  --secondary-color: #f59e0b;
+  --background-color: #064e3b;
+  --text-color: #ecfdf5;
+  --glass-bg: rgba(16, 185, 129, 0.1);
+  --glass-border: rgba(16, 185, 129, 0.2);
+  --accent-color: #34d399;
+  --header-grad: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+}
+
+/* Theme: Solarized */
+.theme-solarized {
+  --primary-color: #b58900;
+  --secondary-color: #2aa198;
+  --background-color: #fdf6e3;
+  --text-color: #073642;
+  --glass-bg: rgba(238, 232, 213, 0.5);
+  --glass-border: rgba(101, 123, 131, 0.2);
+  --accent-color: #cb4b16;
+  --header-grad: linear-gradient(135deg, #eee8d5 0%, #fdf6e3 100%);
 }
 
 body {
   margin: 0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Outfit', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
-.app {
+.theme-root {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 .navbar {
   display: flex;
-  justify-content: center;
-  gap: 2rem;
+  justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1rem 5%;
   background-color: var(--glass-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--glass-border);
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: all var(--transition-speed);
 }
 
-.navbar a {
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
   color: var(--text-color);
   text-decoration: none;
   font-weight: 500;
-  font-size: 1.1rem;
   transition: all 0.3s ease;
   padding: 0.5rem 1rem;
   border-radius: 8px;
 }
 
-.navbar a:hover {
+.nav-links a.active {
+  color: var(--accent-color);
   background: var(--glass-border);
 }
 
-.navbar a.active {
-  color: var(--primary-color);
-  background: rgba(52, 152, 219, 0.1);
+.theme-select {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  color: var(--text-color);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
 }
 
 .header {
-  background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
-  color: white;
-  padding: 4rem 2rem;
+  background: var(--header-grad, linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%));
+  color: var(--text-color);
+  padding: 6rem 2rem;
   text-align: center;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-speed);
 }
 
 .header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
   margin: 0;
-  font-size: 3rem;
-  letter-spacing: -1px;
+  animation: slideDown 0.8s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 main {
   flex: 1;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
-  width: 100%;
+  width: 90%;
 }
 
-.hero, .bio, .contact, .not-found {
-  padding: 4rem 2rem;
-  text-align: center;
-  animation: fadeIn 0.8s ease-out;
+.hero, .bio, .contact-container, .not-found {
+  padding: 5rem 0;
+  animation: fadeIn 1s ease-in;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1.5rem;
   padding: 3rem;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: 20px;
+  border-radius: 24px;
   max-width: 600px;
-  margin: 2rem auto;
+  margin: 0 auto;
 }
 
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 1rem;
+.contact-form input, .contact-form textarea {
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--glass-border);
+  padding: 1rem;
   border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.03);
   color: var(--text-color);
   font-size: 1rem;
-  transition: border-color 0.3s;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  outline: none;
-  border-color: var(--primary-color);
 }
 
 .contact-form button {
-  width: 100%;
-  padding: 1rem;
-  background-color: var(--primary-color);
+  background: var(--primary-color);
   color: white;
+  padding: 1rem;
   border: none;
   border-radius: 12px;
-  font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.3s;
-}
-
-.contact-form button:hover {
-  background-color: #2980b9;
-  transform: translateY(-2px);
 }
 
 .footer {
+  padding: 3rem;
   text-align: center;
-  padding: 2rem;
-  background-color: var(--glass-bg);
   border-top: 1px solid var(--glass-border);
-  margin-top: 4rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-h2, h3 {
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  opacity: 0.7;
 }
